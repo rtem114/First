@@ -46,7 +46,7 @@ public class MemoController {
 		memo.setText(text);
 		memo.setDate(new java.util.Date());
 		memoRepository.save(memo);
-		return "main/";
+		return "redirect:/";
 	}
 
 //	@PostMapping("/a")

@@ -10,7 +10,7 @@
 <body>
 
 	<table >  
-<tr><th>Id</th><th>Name</th><th>LastName</th><th>Gender</th><th>Email</th></tr>  
+<tr><th>Id</th><th>Name</th><th>LastName</th><th>Gender</th><th>Email</th><th>Password</th></tr>  
    
    <c:forEach items="${persons}" var="emp" >   
   <thead>
@@ -20,11 +20,12 @@
    <td>${emp.lastName}</td>  
    <td>${emp.gender}</td>  
    <td>${emp.email}</td>
+   <td>${emp.password}</td>
    </tr> 
    </thead> 
    </c:forEach>  
    </table>  
-  <p>  ${persons.name}</p>
+  
   
 </body>
 </html>

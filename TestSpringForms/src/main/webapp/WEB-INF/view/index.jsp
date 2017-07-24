@@ -35,6 +35,10 @@
                <td>Email</td>
                <td><form:input path="email" /></td>
            </tr>
+           <tr>
+               <td>Password</td>
+               <td><form:input path="password" /></td>
+           </tr>
            
             <tr>
                <td>Submit</td> 

@@ -30,12 +30,13 @@ public class PersonController {
 
 	@PostMapping("/save")
 	public String save(@RequestParam String name, @RequestParam String lastName, @RequestParam String gender,
-			@RequestParam String email) {
+			@RequestParam String email, @RequestParam String password) {
 		Person person = new Person();
 		person.setName(name);
 		person.setLastName(lastName);
 		person.setGender(gender);
 		person.setEmail(email);
+		person.setPassword(password); 
 		personsRepository.save(person);
 		return "main";
 	}
