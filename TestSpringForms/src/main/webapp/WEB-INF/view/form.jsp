@@ -9,9 +9,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="<c:url value="/css/home.css" />" rel="stylesheet"> 
 <title>Persons list</title>
+<style>
+.error-message {
+   color: red;
+   font-size:90%;
+   font-style: italic;
+}
+</style>
 <body>
-	<form:form action="/save" method="POST"  modelAttribute="person">
+	<form:form action="/save" method="POST"  modelAttribute="person" class=".boxBody">
         <table>
            <tr>
                <td>Name</td>
@@ -37,11 +45,39 @@
            </tr>
            <tr>
                <td>Password</td>
-               <td><form:input path="password" /></td>
+               <td><form:password path="password" /></td>
+               
+           </tr>
+           
+           <tr>
+               <td>Position</td>
+              <td><form:select path="position"> 
+               <form:option value="" label="- Position -"/>
+               <form:option value="Developer" label="Developer"/>
+               <form:option value="QA" label="QA"/>
+                <form:option value="HR" label="HR"/>
+               </form:select></td>
+           </tr>
+           
+           <tr>
+               <td>Hobbie</td>
+              <td><form:checkboxes items="${listHobbies}" path="hobbie" itemLabel="id" itemValue="name"/></td>
+               <form:errors path="hobbie" cssClass = "error"/>
+           </tr>
+           
+           <tr>
+               <td>Country</td>
+              <td><form:select items="${listCountries}" path="country" itemLabel="id" itemValue="name"/></td>
+           </tr>
+           
+           
+           <tr>
+               <td >Description </td>
+               <td><form:textarea path="description" cols="20" rows="5" />  </td>
            </tr>
            
             <tr>
-               <td>Submit</td> 
+               <td>&nbsp;</td>  
                <td><input type="submit" value="submit" /></td>
            </tr>
                      

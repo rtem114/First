@@ -11,5 +11,5 @@ import ua.entity.Person;
 @Repository
 public interface PersonsRepository extends JpaRepository<Person, Integer> {
 	List <Person> findAll();
-	
+	Person getPersonById(Integer id);
 }
