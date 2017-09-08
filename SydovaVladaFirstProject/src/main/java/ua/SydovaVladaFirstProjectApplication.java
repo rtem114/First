@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import ua.mainLogic.Parsing;
+import ua.mainLogic.SetCourtsToTheDatabase;
 import ua.mainLogic.VisualLogic;
 
 
@@ -32,6 +33,11 @@ public class SydovaVladaFirstProjectApplication extends JFrame {
 		// оформити парсінг окремою кнопкою 
 //		new Parsing().parse(run);
 //		 run.close();
+		
+		
+//	 new SetCourtsToTheDatabase().settt(run);
+		
+//		new VisualLogic().findAllCourts(run);
 
 	}
 

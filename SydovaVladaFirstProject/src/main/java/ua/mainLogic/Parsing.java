@@ -13,15 +13,18 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 
 import ua.entity.Cases;
+import ua.entity.Courts;
 import ua.repository.CaseRepository;
 
 public class Parsing {
 
-	public void parse(ConfigurableApplicationContext run) {
+	public void parse(ConfigurableApplicationContext run, Courts court) {
 
 		try {
+			
 
-			String START_URL = "http://old.court.gov.ua/sud2415/csz/";
+//			String START_URL = "http://old.court.gov.ua/sud2415/csz/";
+			String START_URL = court.getAdress();
 			WebClient webClient = new WebClient(BrowserVersion.CHROME);
 			HtmlPage page = webClient.getPage(START_URL);
 
@@ -57,6 +60,7 @@ public class Parsing {
 					cas.setNumber(table.getCellAt(i, 2).asText());
 					cas.setSides(table.getCellAt(i, 3).asText());
 					cas.setType(table.getCellAt(i, 4).asText());
+					cas.setCourt(court.getName().toString());
 					caseRepository.save(cas);
 				}
 

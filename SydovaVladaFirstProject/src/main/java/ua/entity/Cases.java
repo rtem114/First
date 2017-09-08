@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,15 +20,27 @@ public class Cases {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	private Date date;
+	@Column(length = 500)
 	private String judge;
+	@Column(length = 500)
 	private String number;
-	@Column(length = 500)
+	@Column(length = 700)
 	private String sides;
-	@Column(length = 500)
+	@Column(length = 700)
 	private String type;
+	private String court;
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name="id")
+	private Courts courts;
 
+	
+	
+	
 
-	public Cases(int id, Date date, String judge, String number, String sides, String type) {
+	public Cases(int id, Date date, String judge, String number, String sides, String type, String court,
+			Courts courts) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -33,8 +48,27 @@ public class Cases {
 		this.number = number;
 		this.sides = sides;
 		this.type = type;
+		this.court = court;
+		this.courts = courts;
 	}
+
+
+
 	public Cases() {};
+
+
+
+	public String getCourt() {
+		return court;
+	}
+
+
+
+	public void setCourt(String court) {
+		this.court = court;
+	}
+
+
 
 	public int getId() {
 		return id;
@@ -84,10 +118,24 @@ public class Cases {
 		this.type = type;
 	}
 
+	public Courts getCourts() {
+		return courts;
+	}
+
+	public void setCourts(Courts courts) {
+		this.courts = courts;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Cases [id=" + id + ", date=" + date + ", judge=" + judge + ", number=" + number + ", sides=" + sides
-				+ ", type=" + type + "]";
+				+ ", type=" + type + ", court=" + court + ", courts=" + courts + "]";
 	}
+
+	
+
+	 
 
 }

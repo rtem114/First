@@ -9,6 +9,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Cases;
+import ua.entity.Courts;
+import ua.mainLogic.CourtsTableModel;
 import ua.mainLogic.TableModel;
 import ua.mainLogic.VisualLogic;
 import javax.swing.JLabel;
@@ -23,6 +25,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Font;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 @Service
 public class Appearance extends JFrame {
@@ -35,12 +39,14 @@ public class Appearance extends JFrame {
 	private JTable table;
 	@Autowired
 	private ConfigurableApplicationContext run;
+	private JButton button;
 
 	public Appearance() {
+
 		setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		setTitle("Cases List");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 497, 338);
+		setBounds(100, 100, 960, 409);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -59,55 +65,64 @@ public class Appearance extends JFrame {
 		textField.setColumns(18);
 
 		btnNewButton = new JButton("Пошук");
-//		String text = textField.getText();
-//		if (text == null) {
-//			btnNewButton.addActionListener((e) -> new VisualLogic().findAll(run));
-//		}else{
-//			btnNewButton.addActionListener((e) -> new VisualLogic().findElement(run, text));
-//		}
 
-			
-			
 		btnNewButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-								
-					try {
-						String text = textField.getText();
 
-						List<Cases> cases = null;
+			public void actionPerformed(ActionEvent e) {
 
-						if (text == null) {
+				try {
+					String text = textField.getText();
+
+					List<Cases> cases = null;
+
+					if (text != null && text.trim().length() > 0) {
+
+						cases = new VisualLogic().findElement(run, text);
+
+					} else {
+
 						cases = new VisualLogic().findAll(run);
-						} else {
-							cases = new VisualLogic().findElement(run, text);
-						}
-						
-						// create the model and update the "table"
-						TableModel model = new TableModel(cases);
-						
-						table.setModel(model);
-						
-						/*
-						for (Employee temp : employees) {
-							System.out.println(temp);
-						}
-						*/
-					} catch (Exception exc) {
-						exc.printStackTrace();
+
 					}
-					
+
+					TableModel model = new TableModel(cases);
+
+					table.setModel(model);
+
+				} catch (Exception exc) {
+					exc.printStackTrace();
 				}
-			});
-			
-			
-			
-			
-			
-			
-//		TableModel model = new TableModel(new VisualLogic().findAll(run));
-//		table.setModel(model);
-		
+
+			}
+		});
+
 		panel.add(btnNewButton);
+
+		button = new JButton("Обрати суд");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+
+				try {
+					
+					List<Courts> courts =  new VisualLogic().findAllCourts(run);
+//					for (Courts courts2 : courts) {
+//						System.out.println(courts2.getName());
+//					}
+
+//					CourtsTableModel model = new CourtsTableModel(courts);
+//					table.setModel(model);
+					CourtsListFrame lof = new CourtsListFrame(run);
+					lof.setVisible(true);
+
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
+
+
+			}
+		});
+		panel.add(button);
 
 		scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);

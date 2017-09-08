@@ -10,18 +10,16 @@ import ua.entity.Cases;
 
 public class TableModel extends AbstractTableModel {
 
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4800709817737161762L;
 	private static final int DATE = 0;
 	private static final int JUDGE = 1;
 	private static final int NUMBER = 2;
 	private static final int SIDES = 3;
 	private static final int TYPE = 4;
+	private static final int COURT = 5;
 
-	private String[] columnNames = { "Date", "Judge", "Number", "Sides", "Type" };
+	private String[] columnNames = { "Дата", "Склад суду", "Номер справи", "Сторони", "Суть справи", "Суд" };
 
 	private List<Cases> cases;
 
@@ -34,6 +32,11 @@ public class TableModel extends AbstractTableModel {
 		return columnNames.length;
 
 	}
+	
+	@Override
+	public String getColumnName(int col) {
+		return columnNames[col];
+	}
 
 	@Override
 	public int getRowCount() {
@@ -41,10 +44,10 @@ public class TableModel extends AbstractTableModel {
 	}
 
 	@Override
-	public Object getValueAt(int row, int column) {
+	public Object getValueAt(int row, int col) {
 		Cases tempCases = cases.get(row);
 
-		switch (column) {
+		switch (col) {
 		case DATE:
 			return tempCases.getDate();
 		case JUDGE:
@@ -55,6 +58,8 @@ public class TableModel extends AbstractTableModel {
 			return tempCases.getSides();
 		case TYPE:
 			return tempCases.getType();
+		case COURT:
+			return tempCases.getCourt();
 		default:
 			return tempCases.getSides();
 		}
