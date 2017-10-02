@@ -4,43 +4,33 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cases")
+@Table(name = "cases")
 public class Cases {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private Date date;
-	@Column(length = 500)
+	@Column(length = 300)
 	private String judge;
-	@Column(length = 500)
+	@Column(length = 100)
 	private String number;
-	@Column(length = 700)
+	@Column(length = 1100)
 	private String sides;
-	@Column(length = 700)
+	@Column(length = 1100)
 	private String type;
 	private String court;
 	
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name="id")
-	private Courts courts;
+	public Cases(){};
 
-	
-	
-	
-
-	public Cases(int id, Date date, String judge, String number, String sides, String type, String court,
-			Courts courts) {
+	public Cases(int id, Date date, String judge, String number, String sides, String type, String court) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -49,26 +39,7 @@ public class Cases {
 		this.sides = sides;
 		this.type = type;
 		this.court = court;
-		this.courts = courts;
 	}
-
-
-
-	public Cases() {};
-
-
-
-	public String getCourt() {
-		return court;
-	}
-
-
-
-	public void setCourt(String court) {
-		this.court = court;
-	}
-
-
 
 	public int getId() {
 		return id;
@@ -118,24 +89,24 @@ public class Cases {
 		this.type = type;
 	}
 
-	public Courts getCourts() {
-		return courts;
+	public String getCourt() {
+		return court;
 	}
 
-	public void setCourts(Courts courts) {
-		this.courts = courts;
+	public void setCourt(String court) {
+		this.court = court;
 	}
+	
+	
 
-
+	
 
 	@Override
 	public String toString() {
 		return "Cases [id=" + id + ", date=" + date + ", judge=" + judge + ", number=" + number + ", sides=" + sides
-				+ ", type=" + type + ", court=" + court + ", courts=" + courts + "]";
+				+ ", type=" + type + ", court=" + court + "]";
 	}
-
 	
-
-	 
+	
 
 }

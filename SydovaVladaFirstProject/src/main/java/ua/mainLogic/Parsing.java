@@ -14,6 +14,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTable;
 
 import ua.entity.Cases;
 import ua.entity.Courts;
+import ua.graphics.FirstPage;
 import ua.repository.CaseRepository;
 
 public class Parsing {
@@ -21,41 +22,51 @@ public class Parsing {
 	public void parse(ConfigurableApplicationContext run, Courts court) {
 
 		try {
-			
 
-//			String START_URL = "http://old.court.gov.ua/sud2415/csz/";
+			
 			String START_URL = court.getAdress();
-			WebClient webClient = new WebClient(BrowserVersion.CHROME);
+			WebClient webClient = new WebClient(BrowserVersion.BEST_SUPPORTED);
 			HtmlPage page = webClient.getPage(START_URL);
 
 			webClient.getOptions().setJavaScriptEnabled(true);
 			// webClient.getOptions().setCssEnabled(true);
 			// webClient.getOptions().setThrowExceptionOnScriptError(false);
 			// webClient.getOptions().setPrintContentOnFailingStatusCode(false);
-			webClient.waitForBackgroundJavaScript(3000);
+			webClient.waitForBackgroundJavaScript(1000);
 
 			HtmlButton button = page.getHtmlElementById("cleardate");
 
 			button.click();
-			webClient.waitForBackgroundJavaScript(3000);
+			webClient.waitForBackgroundJavaScript(1000);
 			final HtmlTable table = page.getHtmlElementById("assignments");
 			CaseRepository caseRepository = run.getBean(CaseRepository.class);
 			DomElement buttonNext = page.getFirstByXPath("//span[@class='ui-icon ui-icon-circle-arrow-e']");
+
+			DomElement elem = page.getElementById("assignments_info");
+
 			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
 			String strdate = null;
-			boolean flag = true;
+			Date nDate = null;
 
-			while (flag) {
+			int second = 0;
+
+			for (int k = 0; k <= second; k++) {
+
 				for (int i = 1; i < 11; i++) {
 					if (table.getCellAt(i, 1) == null) {
 
-						flag = false;
 						break;
 					}
+					String full = elem.asText();
+
+					int first = Integer.valueOf(full.substring(full.indexOf("із") + 3, full.length() - 9));
+					second = first / 10;
+
 					Cases cas = new Cases();
 					strdate = table.getCellAt(i, 0).asText();
-					Date newDate = sdf.parse(strdate);
-					cas.setDate(newDate);
+					nDate = sdf.parse(strdate);
+
+					cas.setDate(nDate);
 					cas.setJudge(table.getCellAt(i, 1).asText());
 					cas.setNumber(table.getCellAt(i, 2).asText());
 					cas.setSides(table.getCellAt(i, 3).asText());
@@ -73,6 +84,7 @@ public class Parsing {
 			ex.printStackTrace();
 
 		}
+		
 	}
 
 }

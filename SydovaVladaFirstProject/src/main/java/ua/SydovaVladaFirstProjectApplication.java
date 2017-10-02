@@ -35,7 +35,7 @@ public class SydovaVladaFirstProjectApplication extends JFrame {
 //		 run.close();
 		
 		
-//	 new SetCourtsToTheDatabase().settt(run);
+	 new SetCourtsToTheDatabase().settt(run);
 		
 //		new VisualLogic().findAllCourts(run);
 
@@ -43,3 +43,4 @@ public class SydovaVladaFirstProjectApplication extends JFrame {
 
 	
 }
+    
