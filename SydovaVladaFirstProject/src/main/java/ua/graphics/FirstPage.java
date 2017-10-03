@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import ua.entity.Cases;
@@ -238,7 +239,7 @@ public class FirstPage extends JFrame {
 				CaseRepository caseRep = run.getBean(CaseRepository.class);
 				List<Cases> listCases = new VisualLogic().findAll(run);
 				caseRep.delete(listCases);
-				new Refresh().refresh();
+				refresh();
 			}
 		});
 		/////////////////////////////////////////////////////////////////////////
@@ -285,11 +286,10 @@ public class FirstPage extends JFrame {
 		scrollPane.setViewportView(table);
 		//////////////////////////////////////////////////////////////////////////////
 
-		new Refresh().refreshHourly();
+//		new Refresh().refreshHourly();
 		//////////////////////////////////////////////////////////////////////////////
 	}
-
-	public class Refresh {
+	
 
 		public void refresh() {
 			try {
@@ -317,14 +317,14 @@ public class FirstPage extends JFrame {
 			}
 		}
 		/////////////////////////////////////////////////////////////////////////////
-
+		@Scheduled(fixedDelay=5000)
 		public void refreshHourly() {
-			new Thread(new Runnable() {
-				public void run() {
-					while (true) {
-
-						try {
-							Thread.sleep(5000);
+//			new Thread(new Runnable() {
+//				public void run() {
+//					while (true) {
+//
+//						try {
+//							Thread.sleep(5000);
 							// ______________________________________________перевірка на перепризначення справ______________________________________________________________
 							System.out.println("відбувається перевірка...");
 						
@@ -438,18 +438,20 @@ public class FirstPage extends JFrame {
 
 							temporaryCasesRepository.delete(listTempCases);
 
-						} catch (Exception e) {
-							System.out.println("problem 3");
-							e.printStackTrace();
-						}
-					}
-				}
-			}).start();
+//						} catch (Exception e) {
+//							System.out.println("problem 3");
+//							e.printStackTrace();
+//						}
+//					}
+//				}
+//			}).start();
 		}
-	}
+	
 
 	/////////////////////////////////////////////////////////////////////////////
 
+	
+	
 	@PostConstruct
 	public void visible() {
 		setVisible(true);

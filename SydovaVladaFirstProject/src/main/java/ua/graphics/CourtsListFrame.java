@@ -66,9 +66,9 @@ public class CourtsListFrame extends JFrame {
 						corTemp = courts2;
 					}
 				}
-				new Parsing().parse(run, corTemp);
-
-				JOptionPane.showMessageDialog(null, "Справи даного суду завантажені.");
+				int t =	new Parsing().parse(run, corTemp);
+				
+				JOptionPane.showMessageDialog(null, "Завантажено " + t + " призначених справ даного суду.");
 
 			}
 		});

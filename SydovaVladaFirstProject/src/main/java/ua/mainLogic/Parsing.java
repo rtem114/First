@@ -19,11 +19,11 @@ import ua.repository.CaseRepository;
 
 public class Parsing {
 
-	public void parse(ConfigurableApplicationContext run, Courts court) {
+	public int parse(ConfigurableApplicationContext run, Courts court) {
 
+		int t = 0;
 		try {
 
-			
 			String START_URL = court.getAdress();
 			WebClient webClient = new WebClient(BrowserVersion.BEST_SUPPORTED);
 			HtmlPage page = webClient.getPage(START_URL);
@@ -73,6 +73,7 @@ public class Parsing {
 					cas.setType(table.getCellAt(i, 4).asText());
 					cas.setCourt(court.getName().toString());
 					caseRepository.save(cas);
+					t++;
 				}
 
 				buttonNext.click();
@@ -84,7 +85,8 @@ public class Parsing {
 			ex.printStackTrace();
 
 		}
-		
+		System.out.println(t);
+		return t;
 	}
 
 }

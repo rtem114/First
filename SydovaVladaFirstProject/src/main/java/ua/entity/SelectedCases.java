@@ -33,7 +33,7 @@ public class SelectedCases {
 	@Column(length = 3000)
 	private String history;
 	
-	@OneToMany(mappedBy="selectedCases")
+	@OneToMany(mappedBy="selectedCases", orphanRemoval=true)
 	List<SelectedCasesHistory> selectedCasesHistory;
 	
 	public SelectedCases(){}

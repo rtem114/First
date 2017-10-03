@@ -115,6 +115,7 @@ public class SelectedCasesListFrame extends JFrame {
 				for (SelectedCases cases : listSelecCas) {
 					String cor = (String) table.getValueAt(row, 2);
 					if (cases.getNumber().equals(cor)) {
+						System.out.println(111);
 						selCasRep.delete(cases);
 					}
 					
