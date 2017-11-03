@@ -1,10 +1,8 @@
 package ua.mainLogic;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.table.DefaultTableCellRenderer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -14,25 +12,29 @@ import ua.entity.Cases;
 import ua.entity.CasesToFind;
 import ua.entity.Courts;
 import ua.entity.SelectedCases;
+import ua.entity.SelectedCasesHistory;
 import ua.entity.TemporaryCases;
 import ua.repository.CaseRepository;
 import ua.repository.CasesToFindRepository;
 import ua.repository.CourtsRepository;
+import ua.repository.SelectedCasesHistoryRepository;
 import ua.repository.SelectedCasesRepository;
 import ua.repository.TemporaryCasesRepository;
 
 @Service
 public class VisualLogic {
-	@Autowired
-	public CourtsRepository courtRepository;
-
-	@Autowired
-	public CaseRepository caseRepository;
-	@Autowired
-	public SelectedCasesRepository selCasRepos;
-
-	@Autowired
-	public TemporaryCasesRepository tempCaseRepository;
+//	@Autowired
+//	public CourtsRepository courtRepository;
+//
+//	@Autowired
+//	public CaseRepository caseRepository;
+//	@Autowired
+//	public SelectedCasesRepository selCasRepos;
+//
+//	@Autowired
+//	public TemporaryCasesRepository tempCaseRepository;
+//	@Autowired
+//	public SelectedCasesHistoryRepository selectedCasesHistoryRepository;
 
 	public List<Cases> findAll(ConfigurableApplicationContext run) {
 
@@ -46,6 +48,7 @@ public class VisualLogic {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		}
 
 		return new ArrayList<>();
@@ -75,8 +78,8 @@ public class VisualLogic {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ArrayList<>();
 		}
+		return new ArrayList<>();
 
 	}
 
@@ -92,8 +95,8 @@ public class VisualLogic {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ArrayList<>();
 		}
+		return new ArrayList<>();
 
 	}
 
@@ -108,8 +111,8 @@ public class VisualLogic {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ArrayList<>();
 		}
+		return new ArrayList<>();
 
 	}
 
@@ -124,8 +127,8 @@ public class VisualLogic {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ArrayList<>();
 		}
+		return new ArrayList<>();
 
 	}
 
@@ -140,8 +143,24 @@ public class VisualLogic {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ArrayList<>();
 		}
+		return new ArrayList<>();
+
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////////////
+	public List<SelectedCasesHistory> findAllSelectedCasesHistory(ConfigurableApplicationContext run) {
+
+		try {
+			SelectedCasesHistoryRepository selectedCasesHistoryRepository = run.getBean(SelectedCasesHistoryRepository.class);
+			List<SelectedCasesHistory> listCasesHistory = selectedCasesHistoryRepository.findAll();
+
+			return listCasesHistory;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ArrayList<>();
 
 	}
 

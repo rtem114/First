@@ -1,5 +1,5 @@
 package ua.mainLogic;
-
+ 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -29,9 +29,9 @@ public class Parsing {
 			HtmlPage page = webClient.getPage(START_URL);
 
 			webClient.getOptions().setJavaScriptEnabled(true);
-			// webClient.getOptions().setCssEnabled(true);
-			// webClient.getOptions().setThrowExceptionOnScriptError(false);
-			// webClient.getOptions().setPrintContentOnFailingStatusCode(false);
+			 webClient.getOptions().setCssEnabled(true);
+			 webClient.getOptions().setThrowExceptionOnScriptError(false);
+			 webClient.getOptions().setPrintContentOnFailingStatusCode(false);
 			webClient.waitForBackgroundJavaScript(1000);
 
 			HtmlButton button = page.getHtmlElementById("cleardate");
@@ -49,6 +49,9 @@ public class Parsing {
 			Date nDate = null;
 
 			int second = 0;
+			String full = elem.asText();
+			int first = Integer.valueOf(full.substring(full.indexOf("із") + 3, full.length() - 9));
+			second = first / 10;
 
 			for (int k = 0; k <= second; k++) {
 
@@ -57,10 +60,6 @@ public class Parsing {
 
 						break;
 					}
-					String full = elem.asText();
-
-					int first = Integer.valueOf(full.substring(full.indexOf("із") + 3, full.length() - 9));
-					second = first / 10;
 
 					Cases cas = new Cases();
 					strdate = table.getCellAt(i, 0).asText();
@@ -83,7 +82,7 @@ public class Parsing {
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-
+			System.out.println("No internet for parsing");
 		}
 		System.out.println(t);
 		return t;

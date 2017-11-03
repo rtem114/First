@@ -7,18 +7,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "casesToFind")
+@Table(name = "casesToFindTable")
 public class CasesToFind {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
 	private String casesToFind;
 	private String court;
 
 	public CasesToFind() {
-	}
+	};
 
 	public CasesToFind(int id, String casesToFind, String court) {
 		super();

@@ -83,6 +83,7 @@ public class ParsingTempCases {
 			webClient.close();
 
 		} catch (Exception ex) {
+			System.out.println("probably, no internet connection...parsTempCas");
 			ex.printStackTrace();
 
 		}

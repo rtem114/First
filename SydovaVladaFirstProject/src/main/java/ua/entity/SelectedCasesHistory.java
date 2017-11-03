@@ -1,12 +1,12 @@
 package ua.entity;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,20 +17,24 @@ public class SelectedCasesHistory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String history;
+	public String history;
+	@Column(length = 1100)
+	private String sides;
+	private Date date;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "selCasJointCol")
-	private SelectedCases selectedCases;
+	// @ManyToOne(fetch = FetchType.LAZY)
+	// @JoinColumn(name = "selCasJointCol")
+	// private SelectedCases selectedCases;
 
 	public SelectedCasesHistory() {
 	}
 
-	public SelectedCasesHistory(int id, String history, SelectedCases selectedCases) {
+	public SelectedCasesHistory(int id, String history, String sides, Date date) {
 		super();
 		this.id = id;
 		this.history = history;
-		this.selectedCases = selectedCases;
+		this.sides = sides;
+		this.date = date;
 	}
 
 	public int getId() {
@@ -49,17 +53,25 @@ public class SelectedCasesHistory {
 		this.history = history;
 	}
 
-	public SelectedCases getSelectedCases() {
-		return selectedCases;
+	public String getSides() {
+		return sides;
 	}
 
-	public void setSelectedCases(SelectedCases selectedCases) {
-		this.selectedCases = selectedCases;
+	public void setSides(String sides) {
+		this.sides = sides;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@Override
 	public String toString() {
-		return "SelectedCasesHistory [id=" + id + ", history=" + history + ", selectedCases=" + selectedCases + "]";
+		return "SelectedCasesHistory [id=" + id + ", history=" + history + ", sides=" + sides + ", date=" + date + "]";
 	}
 
 }

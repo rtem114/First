@@ -95,6 +95,7 @@ public class CasesToFindFrame extends JFrame {
 
 		textField = new JTextField();
 		textField.setColumns(10);
+		setLocationRelativeTo(null);
 		////////////////////////////////////////////////////////////////////////////////////////////////
 		JButton button_1 = new JButton("Додати");
 		button_1.addActionListener(new ActionListener() {
@@ -108,6 +109,8 @@ public class CasesToFindFrame extends JFrame {
 						if (casesToFind.getCasesToFind().toLowerCase().equals(text.toLowerCase())
 								&& casesToFind.getCourt().equals(choise)) {
 							JOptionPane.showMessageDialog(null, "Така справа вже присутня в списку");
+							new Refresh().refresh(run);
+							textField.setText("");
 							return;
 
 						}
@@ -138,7 +141,7 @@ public class CasesToFindFrame extends JFrame {
 		});
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBox.setName("");
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Першотравневий районний суд м. Чернівці", "Садгірський районний суд м. Чернівці", "Шевченківський районний суд м. Чернівці", 
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Першотравневий районний суд м. Чернівці", "Садгірський районний суд м. Чернівці", "Шевченківський районний суд м.Чернівці", 
 				"Вижницький районний суд", "Герцаївський районний суд", "Глибоцький районний суд", "Заставнівський районний суд", "Кельменецький районний суд", "Кіцманський районний суд", 
 				"Новоселицький районний суд", "Путильський районний суд", "Сокирянський районний суд", "Сторожинецький районний суд", "Хотинський районний суд", 
 				"Чернівецький окружний адміністративний суд", "Апеляційний суд", "Новодністровський міський суд", "Господарський суд Чернівецької області"}));
@@ -227,6 +230,7 @@ public class CasesToFindFrame extends JFrame {
 			}
 			scrollPane.setViewportView(table_1);
 			contentPane.setLayout(gl_contentPane);
+			
 		}
 
 	}

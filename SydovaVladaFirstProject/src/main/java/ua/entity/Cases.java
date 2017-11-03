@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.Table;
 
 @Entity
@@ -27,8 +26,9 @@ public class Cases {
 	@Column(length = 1100)
 	private String type;
 	private String court;
-	
-	public Cases(){};
+
+	public Cases() {
+	};
 
 	public Cases(int id, Date date, String judge, String number, String sides, String type, String court) {
 		super();
@@ -96,17 +96,11 @@ public class Cases {
 	public void setCourt(String court) {
 		this.court = court;
 	}
-	
-	
-
-	
 
 	@Override
 	public String toString() {
 		return "Cases [id=" + id + ", date=" + date + ", judge=" + judge + ", number=" + number + ", sides=" + sides
 				+ ", type=" + type + ", court=" + court + "]";
 	}
-	
-	
 
 }

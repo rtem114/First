@@ -1,14 +1,11 @@
 package ua.entity;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,16 +27,16 @@ public class SelectedCases {
 	private String court;
 	@Column(length = 5000)
 	private String memo;
-	@Column(length = 3000)
-	private String history;
 	
-	@OneToMany(mappedBy="selectedCases", orphanRemoval=true)
-	List<SelectedCasesHistory> selectedCasesHistory;
-	
-	public SelectedCases(){}
+
+//	@OneToMany(mappedBy = "selectedCases", orphanRemoval = true)
+//	List<SelectedCasesHistory> selectedCasesHistory;
+
+	public SelectedCases() {
+	};
 
 	public SelectedCases(int id, Date date, String judge, String number, String sides, String type, String court,
-			String memo, String history) {
+			String memo) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -49,7 +46,7 @@ public class SelectedCases {
 		this.type = type;
 		this.court = court;
 		this.memo = memo;
-		this.history = history;
+		
 	}
 
 	public int getId() {
@@ -116,24 +113,12 @@ public class SelectedCases {
 		this.memo = memo;
 	}
 
-	public String getHistory() {
-		return history;
-	}
-
-	public void setHistory(String history) {
-		this.history = history;
-	}
-
-	
-	
 	
 
 	@Override
 	public String toString() {
 		return "SelectedCases [id=" + id + ", date=" + date + ", judge=" + judge + ", number=" + number + ", sides="
-				+ sides + ", type=" + type + ", court=" + court + ", memo=" + memo + ", history=" + history + "]";
-	};
-
-	
+				+ sides + ", type=" + type + ", court=" + court + ", memo=" + memo +  "]";
+	}
 
 }

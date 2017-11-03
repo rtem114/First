@@ -40,7 +40,12 @@ public class TableModel extends AbstractTableModel {
 	public int getRowCount() {
 		return cases.size();
 	}
-
+	  /*
+     * JTable uses this method to determine the default renderer/
+     * editor for each cell.  If we didn't implement this method,
+     * then the last column would contain text ("true"/"false"),
+     * rather than a check box.
+     */
 	// @Override
 	// public Class<?> getColumnClass(int columnIndex) {
 	// if (cases.isEmpty()) {
